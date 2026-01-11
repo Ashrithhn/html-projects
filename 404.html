@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Adithya</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❓</text></svg>" type="image/svg+xml">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .error-code {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #e53e3e;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #718096;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: #4a5568;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #2d3748;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1>Oops! Page Not Found</h1>
+            <p class="error-message">The page you're looking for might have been moved, removed, or doesn't exist.</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Go Back Home</h3>
+                    <p>Return to the main navigation page to explore all projects</p>
+                    <a href="navbar.html" class="btn">Home Page</a>
+                </div>
+                <div class="project-card">
+                    <h3>Explore Projects</h3>
+                    <p>Check out the different HTML projects in this collection</p>
+                    <a href="index.html" class="btn">View Projects</a>
+                </div>
+            </div>
+            
+            <a href="navbar.html" class="back-btn">Back to Home</a>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize visitor counter for 404 page
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            if (container) {
+                const footer = document.createElement('footer');
+                footer.innerHTML = `
+                    <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
+                    <div class='visit-counter'>Visitors: <span id='visitor-count'>--</span></div>
+                `;
+                container.appendChild(footer);
+                
+                // Initialize visitor counter
+                initializeVisitorCounter();
+            }
+        });
+        
+        // Initialize visitor counter function
+        function initializeVisitorCounter() {
+            // Get stored count or start with a random number
+            let visitorCount = localStorage.getItem('visitorCount404');
+            
+            if (!visitorCount) {
+                visitorCount = Math.floor(Math.random() * 100) + 20; // Random number between 20-120
+                localStorage.setItem('visitorCount404', visitorCount);
+            } else {
+                visitorCount = parseInt(visitorCount);
+                visitorCount++; // Increment for new visitor
+                localStorage.setItem('visitorCount404', visitorCount);
+            }
+            
+            // Update the counter display
+            const counterElement = document.getElementById('visitor-count');
+            if (counterElement) {
+                counterElement.textContent = visitorCount.toLocaleString();
+            }
+        }
+    </script>
+</body>
+</html>

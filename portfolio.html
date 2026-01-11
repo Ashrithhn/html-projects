@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Adithya</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>" type="image/svg+xml">
+</head>
+<body>
+    <div class="container">
+        <h1>My Portfolio</h1>
+        <p>I'm Adithya, a passionate Computer Science student dedicated to creating innovative web solutions. Explore my projects and skills below.</p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Web Developer</h3>
+                <p>Specializing in HTML, CSS, JavaScript, and modern frameworks.</p>
+            </div>
+            <div class="project-card">
+                <h3>UI/UX Designer</h3>
+                <p>Creative designer with focus on user-centered design principles.</p>
+            </div>
+            <div class="project-card">
+                <h3>Open Source Contributor</h3>
+                <p>Active contributor to various open-source projects and initiatives.</p>
+            </div>
+            <div class="project-card">
+                <h3>Problem Solver</h3>
+                <p>Passionate about solving complex challenges with elegant solutions.</p>
+            </div>
+        </div>
+        
+        <a href="#" class="btn">Download RESUME</a>
+    </div>
+    <script>
+        // Initialize visitor counter for portfolio page
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            if (container) {
+                const footer = document.createElement('footer');
+                footer.innerHTML = `
+                    <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
+                    <div class='visit-counter'>Visitors: <span id='visitor-count'>--</span></div>
+                `;
+                container.appendChild(footer);
+                
+                // Initialize visitor counter
+                initializeVisitorCounter();
+            }
+        });
+        
+        // Initialize visitor counter function
+        function initializeVisitorCounter() {
+            // Get stored count or start with a random number
+            let visitorCount = localStorage.getItem('visitorCountPortfolio');
+            
+            if (!visitorCount) {
+                visitorCount = Math.floor(Math.random() * 400) + 80; // Random number between 80-480
+                localStorage.setItem('visitorCountPortfolio', visitorCount);
+            } else {
+                visitorCount = parseInt(visitorCount);
+                visitorCount++; // Increment for new visitor
+                localStorage.setItem('visitorCountPortfolio', visitorCount);
+            }
+            
+            // Update the counter display
+            const counterElement = document.getElementById('visitor-count');
+            if (counterElement) {
+                counterElement.textContent = visitorCount.toLocaleString();
+            }
+        }
+    </script>
+</body>
+</html>
