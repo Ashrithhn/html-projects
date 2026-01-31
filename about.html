@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Adithya's Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👤</text></svg>" type="image/svg+xml">
+    <style>
+        .about-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .about-container h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        .about-container h2 {
+            font-size: 1.3rem;
+            color: #4a5568;
+            margin: 24px 0 12px;
+        }
+        .about-container p {
+            color: #718096;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="about-container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <h1>About Me</h1>
+            <p>Hi, I'm <strong>Adithya</strong> — a Computer Science student with a passion for web development and building clean, user-friendly interfaces.</p>
+            <h2>What I Do</h2>
+            <p>I build responsive websites using HTML, CSS, and JavaScript. This site is a collection of my projects and experiments, from landing pages and portfolios to contact forms and navigation hubs.</p>
+            <h2>Tech Stack</h2>
+            <p>HTML5, CSS3 (Flexbox & Grid), and vanilla JavaScript. I focus on modern UI/UX, accessibility, and performance.</p>
+            <h2>Get in Touch</h2>
+            <p>Head over to the <a href="contact.html">Contact</a> page to send a message, or explore my <a href="portfolio.html">Portfolio</a> to see more work.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            if (container) {
+                const footer = document.createElement('footer');
+                footer.innerHTML = '<p>Built with ❤️ using HTML, CSS, and JavaScript</p>';
+                container.appendChild(footer);
+            }
+        });
+    </script>
+</body>
+</html>

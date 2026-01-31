@@ -74,6 +74,7 @@ server.listen(PORT, () => {
   console.log(`- http://localhost:${PORT}/index.html (Homepage)`);
   console.log(`- http://localhost:${PORT}/navbar.html (Navigation Page)`);
   console.log(`- http://localhost:${PORT}/portfolio.html (Portfolio)`);
+  console.log(`- http://localhost:${PORT}/about.html (About)`);
   console.log(`- http://localhost:${PORT}/contact.html (Contact Form)`);
   console.log(`- http://localhost:${PORT}/404.html (Error Page)`);
 });

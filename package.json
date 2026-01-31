@@ -1,0 +1,12 @@
+{
+  "name": "html-projects",
+  "version": "1.0.0",
+  "description": "Collection of HTML, CSS, and JavaScript web projects",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["html", "css", "javascript", "portfolio"],
+  "author": "",
+  "license": "MIT"
+}

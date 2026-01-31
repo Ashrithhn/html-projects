@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: (add your sitemap URL here when deployed)

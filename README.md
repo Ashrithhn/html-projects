@@ -6,6 +6,7 @@ Welcome to my collection of HTML projects! This repository contains various web 
 
 - Main Navigation (`navbar.html`) - Entry point for all projects
 - Interactive Landing Page (`index.html`)
+- About Page (`about.html`)
 - Professional Portfolio Page (`portfolio.html`)
 - Contact Form Page (`contact.html`)
 - Error Page (`404.html`) - Custom 404 error page
@@ -24,9 +25,9 @@ To view these projects locally:
 
 ### Option 2: Using Node.js Server
 1. Make sure you have Node.js installed
-2. Navigate to the project directory
-3. Run `node server.js`
-4. Open your browser to `http://localhost:8080`
+2. Navigate to the project directory: `cd html-projects`
+3. Run `npm start` or `node server.js`
+4. Open your browser to `http://localhost:3000`
 
 ### Option 3: Direct File Opening
 1. Open any of the `.html` files directly in your browser
