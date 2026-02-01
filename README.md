@@ -1,6 +1,6 @@
 # HTML Projects Collection
 
-Welcome to my collection of HTML projects! This repository contains various web development experiments and demos showcasing modern HTML, CSS, and JavaScript techniques.
+Welcome to my collection of HTML projects! This repository contains various web development experiments and demos showcasing modern HTML, CSS, and JavaScript techniques,and guidance.
 
 ## Projects Included
 
