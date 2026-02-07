@@ -2,7 +2,7 @@
 
 Welcome to my collection of HTML projects! This repository contains various web development experiments and demos showcasing modern HTML, CSS, and JavaScript techniques,and guidance.
 
-## Projects Included
+## Projects Included also
 
 - Main Navigation (`navbar.html`) - Entry point for all projects
 - Interactive Landing Page (`index.html`)
