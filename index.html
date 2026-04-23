@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Adithya's Website</title>
+    <title>Home | Nexus Core Hub</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>" type="image/svg+xml">
     <style>
@@ -173,10 +173,8 @@
 <body>
     <div class="container">
         <div class="home-container">
-            <div class="welcome-section">
-                <h1>Welcome to My new Website</h1>
-                <p>Hi, I'm <strong>Adithya</strong> - A passionate Computer Science student exploring the world of web development. Navigate through my projects and pages using the buttons below!</p>
-            </div>
+                <h1>Welcome to Nexus Core Hub</h1>
+                <p>Explore a collection of modern, responsive web projects designed for the next generation of digital experiences. Navigate through the showcase below!</p>
 
             <div class="nav-buttons-grid">
                 <a href="navbar.html" class="nav-button navbar">
@@ -232,53 +230,6 @@
         </div>
     </div>
 
-    <script>
-        // Add visitor counter functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.querySelector('.container');
-            if (container) {
-                const footer = document.createElement('footer');
-                footer.innerHTML = `
-                    <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
-                    <div class='visit-counter'>Visitors: <span id='visitor-count'>--</span></div>
-                `;
-                container.appendChild(footer);
-                
-                // Initialize visitor counter
-                initializeVisitorCounter();
-            }
-
-            // Add animation to buttons
-            const buttons = document.querySelectorAll('.nav-button');
-            buttons.forEach((button, index) => {
-                button.style.opacity = '0';
-                button.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    button.style.transition = 'all 0.5s ease';
-                    button.style.opacity = '1';
-                    button.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-        
-        // Initialize visitor counter function
-        function initializeVisitorCounter() {
-            let visitorCount = localStorage.getItem('visitorCountHome');
-            
-            if (!visitorCount) {
-                visitorCount = Math.floor(Math.random() * 200) + 50;
-                localStorage.setItem('visitorCountHome', visitorCount);
-            } else {
-                visitorCount = parseInt(visitorCount);
-                visitorCount++;
-                localStorage.setItem('visitorCountHome', visitorCount);
-            }
-            
-            const counterElement = document.getElementById('visitor-count');
-            if (counterElement) {
-                counterElement.textContent = visitorCount.toLocaleString();
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

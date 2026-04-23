@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Projects Navigation | Adithya</title>
+    <title>Nexus Core Hub</title>
     <style>
         * {
             margin: 0;
@@ -107,9 +107,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>HTML Projects Collection</h1>
-        <p>I'm Adithya, a passionate Computer Science student. Explore my HTML projects below.</p>
+        <h1>Nexus Core Collection</h1>
+        <p>Explore our library of HTML, CSS, and JS web projects designed for modern standards. Search and navigate through the hub below.</p>
 
         <div class="nav-grid">
             <a href="index.html" class="nav-card">
@@ -130,46 +129,8 @@
             </a>
         </div>
 
-        <a href="https://github.com/Adithyakp86/html-projects" class="btn">View on GitHub</a>
+        <a href="https://github.com/NexusCore" class="btn">View on GitHub</a>
     </div>
-    <script>
-        // Add visitor counter functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add footer with visitor counter
-            const container = document.querySelector('.container');
-            if (container) {
-                const footer = document.createElement('footer');
-                footer.innerHTML = `
-                    <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
-                    <div class='visit-counter'>Visitors: <span id='visitor-count'>--</span></div>
-                `;
-                container.appendChild(footer);
-                
-                // Initialize visitor counter
-                initializeVisitorCounter();
-            }
-        });
-        
-        // Initialize visitor counter function
-        function initializeVisitorCounter() {
-            // Get stored count or start with a random number
-            let visitorCount = localStorage.getItem('visitorCountNav');
-            
-            if (!visitorCount) {
-                visitorCount = Math.floor(Math.random() * 200) + 30; // Random number between 30-230
-                localStorage.setItem('visitorCountNav', visitorCount);
-            } else {
-                visitorCount = parseInt(visitorCount);
-                visitorCount++; // Increment for new visitor
-                localStorage.setItem('visitorCountNav', visitorCount);
-            }
-            
-            // Update the counter display
-            const counterElement = document.getElementById('visitor-count');
-            if (counterElement) {
-                counterElement.textContent = visitorCount.toLocaleString();
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

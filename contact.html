@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me | Adithya</title>
+    <title>Contact Us | Nexus Core</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📧</text></svg>" type="image/svg+xml">
     <style>
@@ -77,13 +77,12 @@
 </head>
 <body>
     <div class="container">
-        <div class="contact-container">
             <h1>Get In Touch</h1>
-            <p>I'm Adithya, a passionate Computer Science student. Feel free to reach out for collaborations, questions, or just to connect!</p>
+            <p>Nexus Core is open for collaborations, project inquiries, and general questions. We'd love to hear from you!</p>
             
             <div class="contact-info">
                 <h3>Contact Information</h3>
-                <p><strong>Email:</strong> adithya@example.com</p>
+                <p><strong>Email:</strong> contact@nexuscore.io</p>
                 <p><strong>Location:</strong> India</p>
                 <p><strong>Availability:</strong> Open to new opportunities and collaborations</p>
                 
@@ -126,60 +125,15 @@
         </div>
     </div>
     
+    <script src="script.js"></script>
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Show confirmation
             alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you at ${email} soon.`);
-            
-            // Reset form
             this.reset();
         });
-        
-        // Add visitor counter functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add footer with visitor counter
-            const container = document.querySelector('.container');
-            if (container) {
-                const footer = document.createElement('footer');
-                footer.innerHTML = `
-                    <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
-                    <div class='visit-counter'>Visitors: <span id='visitor-count'>--</span></div>
-                `;
-                container.appendChild(footer);
-                
-                // Initialize visitor counter
-                initializeVisitorCounter();
-            }
-        });
-        
-        // Initialize visitor counter function
-        function initializeVisitorCounter() {
-            // Get stored count or start with a random number
-            let visitorCount = localStorage.getItem('visitorCountContact');
-            
-            if (!visitorCount) {
-                visitorCount = Math.floor(Math.random() * 300) + 50; // Random number between 50-350
-                localStorage.setItem('visitorCountContact', visitorCount);
-            } else {
-                visitorCount = parseInt(visitorCount);
-                visitorCount++; // Increment for new visitor
-                localStorage.setItem('visitorCountContact', visitorCount);
-            }
-            
-            // Update the counter display
-            const counterElement = document.getElementById('visitor-count');
-            if (counterElement) {
-                counterElement.textContent = visitorCount.toLocaleString();
-            }
-        }
     </script>
 </body>
-</html>
+</html>
