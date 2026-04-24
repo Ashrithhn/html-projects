@@ -6,7 +6,16 @@
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": ["html", "css", "javascript", "portfolio"],
+  "keywords": [
+    "html",
+    "css",
+    "javascript",
+    "portfolio"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1"
+  }
 }

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Nexus Core Hub</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>"
+        type="image/svg+xml">
     <style>
         .home-container {
             max-width: 1000px;
@@ -170,66 +173,74 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="home-container">
+    <%- include('partials/header') %>
+
+        <div class="container">
+            <div class="home-container">
                 <h1>Welcome to Nexus Core Hub</h1>
-                <p>Explore a collection of modern, responsive web projects designed for the next generation of digital experiences. Navigate through the showcase below!</p>
+                <p>Explore a collection of modern, responsive web projects designed for the next generation of digital
+                    experiences. Navigate through the showcase below!</p>
 
-            <div class="nav-buttons-grid">
-                <a href="navbar.html" class="nav-button navbar">
-                    <span class="nav-button-icon">🧭</span>
-                    <h3>Navigation Page</h3>
-                    <p>Explore all projects and pages from the main navigation hub</p>
-                </a>
+                <div class="nav-buttons-grid">
+                    <a href="/navbar" class="nav-button navbar">
+                        <span class="nav-button-icon">🧭</span>
+                        <h3>Navigation Page</h3>
+                        <p>Explore all projects and pages from the main navigation hub</p>
+                    </a>
 
-                <a href="portfolio.html" class="nav-button portfolio">
-                    <span class="nav-button-icon">👨‍💻</span>
-                    <h3>Portfolio</h3>
-                    <p>View my professional portfolio showcasing skills and projects</p>
-                </a>
+                    <a href="/portfolio" class="nav-button portfolio">
+                        <span class="nav-button-icon">👨‍💻</span>
+                        <h3>Portfolio</h3>
+                        <p>View my professional portfolio showcasing skills and projects</p>
+                    </a>
 
-                <a href="about.html" class="nav-button" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);">
-                    <span class="nav-button-icon">👤</span>
-                    <h3>About Me</h3>
-                    <p>Learn more about me and what I do</p>
-                </a>
+                    <a href="/about" class="nav-button"
+                        style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);">
+                        <span class="nav-button-icon">👤</span>
+                        <h3>About Me</h3>
+                        <p>Learn more about me and what I do</p>
+                    </a>
 
-                <a href="contact.html" class="nav-button contact">
-                    <span class="nav-button-icon">📧</span>
-                    <h3>Contact Me</h3>
-                    <p>Get in touch with me through the contact form</p>
-                </a>
-            </div>
+                    <a href="/contact" class="nav-button contact">
+                        <span class="nav-button-icon">📧</span>
+                        <h3>Contact Me</h3>
+                        <p>Get in touch with me through the contact form</p>
+                    </a>
+                </div>
 
-            <div class="features-section">
-                <h2 style="text-align: center; color: #4a5568; margin-bottom: 20px;">What You'll Find</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="icon">🎨</div>
-                        <h4>Modern Design</h4>
-                        <p>Beautiful and responsive UI</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="icon">⚡</div>
-                        <h4>Fast & Smooth</h4>
-                        <p>Optimized performance</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="icon">📱</div>
-                        <h4>Mobile Friendly</h4>
-                        <p>Works on all devices</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="icon">💡</div>
-                        <h4>Interactive</h4>
-                        <p>Engaging user experience</p>
+                <div class="features-section">
+                    <h2 style="text-align: center; color: #4a5568; margin-bottom: 20px;">What You'll Find</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="icon">🎨</div>
+                            <h4>Modern Design</h4>
+                            <p>Beautiful and responsive UI</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">⚡</div>
+                            <h4>Fast & Smooth</h4>
+                            <p>Optimized performance</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">📱</div>
+                            <h4>Mobile Friendly</h4>
+                            <p>Works on all devices</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">💡</div>
+                            <h4>Interactive</h4>
+                            <p>Engaging user experience</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="script.js"></script>
+        <%- include('partials/footer') %>
+
+            <script src="/script.js"></script>
 </body>
+
 </html>

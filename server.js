@@ -1,80 +1,39 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const PORT = 3000;
-const MIME_TYPES = {
-  '.html': 'text/html',
-  '.css': 'text/css',
-  '.js': 'text/javascript',
-  '.json': 'application/json',
-  '.png': 'image/png',
-  '.jpg': 'image/jpg',
-  '.gif': 'image/gif',
-  '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon'
-};
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-const server = http.createServer((req, res) => {
-  console.log(`Request: ${req.method} ${req.url}`);
-  
-  // Handle the root route by redirecting to index.html (main homepage)
-  let filePath = req.url === '/' ? '/index.html' : req.url;
-  
-  // If the requested file doesn't exist with extension, try adding .html
-  if (!path.extname(filePath)) {
-    filePath += '.html';
-  }
-  
-  filePath = path.join(process.cwd(), filePath);
-  
-  // Resolve the path to prevent directory traversal
-  const resolvedPath = path.resolve(process.cwd());
-  const requestedPath = path.resolve(filePath);
-  
-  if (!requestedPath.startsWith(resolvedPath)) {
-    res.writeHead(403);
-    res.end('403 Forbidden');
-    return;
-  }
-  
-  const extname = path.extname(filePath).toLowerCase();
-  const contentType = MIME_TYPES[extname] || 'application/octet-stream';
-  
-  fs.readFile(filePath, (err, content) => {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        // Try to serve 404.html if it exists
-        const errorPagePath = path.join(process.cwd(), '404.html');
-        fs.readFile(errorPagePath, (err404, content404) => {
-          if (err404) {
-            res.writeHead(404);
-            res.end('404 Not Found');
-          } else {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.end(content404, 'utf-8');
-          }
-        });
-      } else {
-        res.writeHead(500);
-        res.end(`Server Error: ${err.code}`);
-      }
-    } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
-    }
-  });
+// Serve static files
+app.use(express.static(path.join(__dirname)));
+
+// Routes
+const pages = ['about', 'contact', 'portfolio', 'navbar', '404'];
+
+app.get('/', (req, res) => {
+    res.render('index', { currentPage: 'index' });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-  console.log(`Serving files from: ${process.cwd()}`);
-  console.log('Available pages:');
-  console.log(`- http://localhost:${PORT}/ (Homepage with Navigation)`);
-  console.log(`- http://localhost:${PORT}/index.html (Homepage)`);
-  console.log(`- http://localhost:${PORT}/navbar.html (Navigation Page)`);
-  console.log(`- http://localhost:${PORT}/portfolio.html (Portfolio)`);
-  console.log(`- http://localhost:${PORT}/about.html (About)`);
-  console.log(`- http://localhost:${PORT}/contact.html (Contact Form)`);
-  console.log(`- http://localhost:${PORT}/404.html (Error Page)`);
+pages.forEach(page => {
+    app.get(`/${page}`, (req, res) => {
+        res.render(page, { currentPage: page });
+    });
+    // Support .html suffix for backward compatibility if needed, 
+    // but better to redirect or just handle it.
+    app.get(`/${page}.html`, (req, res) => {
+        res.redirect(`/${page}`);
+    });
+});
+
+// Handle 404
+app.use((req, res) => {
+    res.status(404).render('404', { currentPage: '404' });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
+    console.log(`Serving templates from: ${path.join(__dirname, 'views')}`);
 });
