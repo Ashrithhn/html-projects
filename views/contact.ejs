@@ -80,6 +80,58 @@
         .social-link:hover {
             transform: scale(1.1);
         }
+
+        .status-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .status-message.success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #34d399;
+            display: block;
+        }
+
+        .status-message.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 
@@ -103,6 +155,8 @@
                     <a href="#" class="social-link" title="Twitter">TW</a>
                 </div>
             </div>
+
+            <div id="statusMessage" class="status-message"></div>
 
             <form id="contactForm">
                 <div class="form-group">
@@ -139,12 +193,75 @@
 
             <script src="/script.js"></script>
             <script>
-                document.getElementById('contactForm')?.addEventListener('submit', function (e) {
+                document.getElementById('contactForm')?.addEventListener('submit', async function (e) {
                     e.preventDefault();
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you at ${email} soon.`);
-                    this.reset();
+                    
+                    const form = this;
+                    const statusMessage = document.getElementById('statusMessage');
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.textContent;
+
+                    // Reset status
+                    statusMessage.className = 'status-message';
+                    statusMessage.textContent = '';
+                    statusMessage.style.display = 'none';
+
+                    // Get form data
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+
+                    // Basic client-side validation check (browser does some with 'required')
+                    if (!data.name || !data.email || !data.message) {
+                        showStatus('Please fill in all required fields.', 'error');
+                        return;
+                    }
+
+                    try {
+                        // Set loading state
+                        submitBtn.classList.add('loading');
+                        submitBtn.textContent = 'Sending...';
+                        submitBtn.disabled = true;
+
+                        const response = await fetch('/contact', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok && result.success) {
+                            showStatus(result.message || 'Thank you! Your message has been sent successfully.', 'success');
+                            form.reset();
+                        } else {
+                            let errorMsg = result.message || 'Something went wrong. Please try again.';
+                            if (result.errors && Array.isArray(result.errors)) {
+                                errorMsg = result.errors.map(err => err.msg).join(' ');
+                            } else if (result.error) {
+                                errorMsg = result.error; // Rate limit message
+                            }
+                            showStatus(errorMsg, 'error');
+                        }
+                    } catch (error) {
+                        console.error('Fetch error:', error);
+                        showStatus('Network error. Please check your connection and try again.', 'error');
+                    } finally {
+                        // Reset loading state
+                        submitBtn.classList.remove('loading');
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    }
+
+                    function showStatus(message, type) {
+                        statusMessage.textContent = message;
+                        statusMessage.className = `status-message ${type}`;
+                        statusMessage.style.display = 'block';
+                        
+                        // Scroll to message
+                        statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
                 });
             </script>
 </body>
