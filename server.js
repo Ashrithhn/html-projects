@@ -3,6 +3,8 @@ const path = require('path');
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs-extra');
+const morgan = require('morgan');
+const logger = require('./utils/logger');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,6 +13,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+// Use morgan to log HTTP requests, forwarding to winston's info level
+app.use(morgan('combined', {
+    stream: { write: (message) => logger.info(message.trim()) }
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
@@ -83,7 +89,7 @@ app.post('/contact', contactLimiter, [
 
         res.json({ success: true, message: 'Message received successfully!' });
     } catch (err) {
-        console.error('Error saving contact submission:', err);
+        logger.error('Error saving contact submission', { error: err.message, stack: err.stack });
         res.status(500).json({ success: false, message: 'Internal server error. Please try again later.' });
     }
 });
@@ -94,6 +100,6 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/`);
-    console.log(`Serving templates from: ${path.join(__dirname, 'views')}`);
+    logger.info(`Server running at http://localhost:${PORT}/`);
+    logger.info(`Serving templates from: ${path.join(__dirname, 'views')}`);
 });
