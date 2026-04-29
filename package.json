@@ -1,7 +1,7 @@
 {
   "name": "html-projects",
   "version": "1.0.0",
-  "description": "Collection of HTML, CSS, and JavaScript web projects",
+  "description": "To build Collection of HTML, CSS, and JavaScript web projects",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
