@@ -4,9 +4,7 @@
   "description": "To build Collection of HTML, CSS, and JavaScript web projects",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "lint": "echo \"Linting passed\" && exit 0",
-    "test": "echo \"Tests passed\" && exit 0"
+    "start": "node server.js"
   },
   "keywords": [
     "html",
