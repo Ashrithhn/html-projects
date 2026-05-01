@@ -19,7 +19,7 @@ app.use(morgan('combined', {
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Rate Limiting: Max 5 contact form submissions per hour per IP
 const contactLimiter = rateLimit({
