@@ -5,6 +5,24 @@ const rateLimit = require('express-rate-limit');
 const fs = require('fs-extra');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
+const nodemailer = require('nodemailer');
+
+// Configure Nodemailer Transporter using environment variables
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.ethereal.email',
+    port: parseInt(process.env.SMTP_PORT, 10) || 587,
+    secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+    auth: {
+        user: process.env.SMTP_USER || null,
+        pass: process.env.SMTP_PASS || null
+    }
+});
+
+const isMailConfigured = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
+if (!isMailConfigured) {
+    logger.warn('SMTP credentials not configured. Email notifications will be logged instead of sent.');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -86,6 +104,36 @@ app.post('/contact', contactLimiter, [
         
         // Write back to file
         await fs.writeJson(filePath, contacts, { spaces: 2 });
+
+        // Send email notification
+        const mailOptions = {
+            from: process.env.CONTACT_SENDER || 'no-reply@nexuscore.io',
+            to: process.env.CONTACT_RECEIVER || 'admin@nexuscore.io',
+            subject: `New Contact Form Submission: ${subject}`,
+            text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 5px; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                    <h2 style="color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px; margin-top: 0;">New Contact Form Submission</h2>
+                    <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
+                    <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a></p>
+                    <p style="margin: 10px 0;"><strong>Subject:</strong> ${subject}</p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+                    <p style="margin: 10px 0;"><strong>Message:</strong></p>
+                    <div style="white-space: pre-wrap; background: #f7fafc; padding: 15px; border-radius: 5px; border-left: 4px solid #667eea; font-style: italic; color: #4a5568;">${message}</div>
+                </div>
+            `
+        };
+
+        if (isMailConfigured) {
+            try {
+                await transporter.sendMail(mailOptions);
+                logger.info('Email notification sent successfully.');
+            } catch (mailErr) {
+                logger.error('Failed to send email notification', { error: mailErr.message, stack: mailErr.stack });
+            }
+        } else {
+            logger.info(`SMTP not configured. Logged notification details: ${JSON.stringify(mailOptions, null, 2)}`);
+        }
 
         res.json({ success: true, message: 'Message received successfully!' });
     } catch (err) {
